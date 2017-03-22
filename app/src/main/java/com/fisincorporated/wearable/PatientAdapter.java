@@ -21,15 +21,14 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
 
     @Override
     public PatientAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        // Currently looking like compile error but app does run
         PatientLayoutBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), ViewHolder.LAYOUT_RESOURCE, parent, false);
         return new PatientAdapter.ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(PatientAdapter.ViewHolder holder, int position) {
-        // Note that binding is direct to StationControl via it's interface (as opposed to having ViewModel)
         holder.binding.setPatient(patientList.get(position));
-
     }
 
 
