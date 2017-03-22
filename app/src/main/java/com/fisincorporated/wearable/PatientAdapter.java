@@ -12,8 +12,8 @@ import com.fisincorporated.wearable.databinding.PatientLayoutBinding;
 import java.util.List;
 
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHolder> {
-    private ObservableArrayList<Patient> patientList = new ObservableArrayList<>();
 
+    private ObservableArrayList<Patient> patientList = new ObservableArrayList<>();
 
     public PatientAdapter(List<Patient> patientList) {
         this.patientList.addAll(patientList);

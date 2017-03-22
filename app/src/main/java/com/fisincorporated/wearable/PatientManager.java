@@ -10,15 +10,13 @@ public class PatientManager {
 
     private static PatientManager patientManager;
 
-    public static ObservableArrayList<Patient> getPatients(){
-        if  (patientManager == null) {
+    public static ObservableArrayList<Patient> getPatients() {
+        if (patientManager == null) {
             patientManager = new PatientManager();
             patientManager.addPatients();
         }
         return patientManager.patientList;
-
     }
-
 
     private void addPatients() {
         Patient patient = new Patient("John Doe", "120/80", 92);
@@ -35,6 +33,5 @@ public class PatientManager {
 
         patient = new Patient("Young Blood", "130/80", 72);
         patientList.add(patient);
-
     }
 }
