@@ -29,8 +29,12 @@ dependencies {
     compile ('com.google.android.support:wearable:2.0.0') {
         exclude group: 'com.android.support:percent:23.0.1'
     }
+
     compile 'com.google.android.gms:play-services-wearable:10.2.0'
     provided 'com.google.android.wearable:wearable:2.0.0'
 
+    compile ('com.android.support:recyclerview-v7:24.2.0') {
+        exclude group: 'com.android.support:percent:24.2.0'
+    }
 
 }

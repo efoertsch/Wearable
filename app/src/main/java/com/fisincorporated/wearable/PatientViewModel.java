@@ -2,7 +2,9 @@ package com.fisincorporated.wearable;
 
 import android.databinding.ObservableArrayList;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
 import android.view.View;
 
 public class PatientViewModel {
@@ -13,6 +15,8 @@ public class PatientViewModel {
     public PatientViewModel(View view) {
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.patient_recyclerView);
+        SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(recyclerView);
         setupRecyclerView(recyclerView);
         addPatients();
 
@@ -26,20 +30,7 @@ public class PatientViewModel {
     }
 
     private void addPatients() {
-        Patient patient = new Patient("John Doe", "120/80", 92);
-        patientList.add(patient);
-
-        patient = new Patient("Jane Smith", "110/70", 72);
-        patientList.add(patient);
-
-        patient = new Patient("Iam Critical", "90/60", 52);
-        patientList.add(patient);
-
-        patient = new Patient("Iam Lazarus", "120/70", 62);
-        patientList.add(patient);
-
-        patient = new Patient("Young Blood", "130/80", 72);
-        patientList.add(patient);
+         patientList.addAll(PatientManager.getPatients());
 
     }
 }
