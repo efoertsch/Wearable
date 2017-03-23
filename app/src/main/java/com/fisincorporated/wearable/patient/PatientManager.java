@@ -1,4 +1,4 @@
-package com.fisincorporated.wearable;
+package com.fisincorporated.wearable.patient;
 
 
 

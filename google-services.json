@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "767558991299",
+    "firebase_url": "https://wearable-842de.firebaseio.com",
+    "project_id": "wearable-842de",
+    "storage_bucket": "wearable-842de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767558991299:android:00b986eb7c8cbc2d",
+        "android_client_info": {
+          "package_name": "com.fisincorporated.wearable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "767558991299-j8fjsb8m5bspg9prgjpeg355ttqn441f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fisincorporated.wearable",
+            "certificate_hash": "c6331056b27a06d7d97c832654a6940d00eb2f1d"
+          }
+        },
+        {
+          "client_id": "767558991299-2ljjrsl219t91see3eiiqvjs6go2j36r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1OZ9c9eww-XXHE2II5RqW-ZdrnsIazpI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "767558991299-2ljjrsl219t91see3eiiqvjs6go2j36r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,8 +1,10 @@
-package com.fisincorporated.wearable;
+package com.fisincorporated.wearable.patient;
 
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+
+import com.fisincorporated.wearable.BR;
 
 public class Patient  extends BaseObservable {
     private String name;

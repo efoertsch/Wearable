@@ -1,6 +1,22 @@
 <resources>
     <string name="app_name">Wearable</string>
-    <string name="hello_world">Hello World!</string>
+
+    <!-- Patient monitor -->
     <string name="patient_bp_label">BP: %1$s</string>
     <string name="patient_pulse_label">Pulse: %1$d</string>
+
+    <!-- Network -->
+    <string name="network_fast">Network Fast</string>
+    <string name="network_slow">Network Slow</string>
+    <string name="network_disconnected">Disconnected</string>
+    <string name="network_connecting">Connecting</string>
+
+    <string name="info_request_network">To use this app, ensure that you have removed saved Wi-Fi networks and the device is unplugged</string>
+    <string name="info_release_network">A high-bandwidth network is now available</string>
+    <string name="info_add_wifi">No high-bandwidth network is available. You must add a Wi-Fi network to continue</string>
+
+    <string name="button_request_network">Request High-bandwidth Network</string>
+    <string name="button_release_network">Release High-bandwidth Network</string>
+    <string name="button_add_wifi">Add Wi-Fi Network</string>
+
 </resources>
