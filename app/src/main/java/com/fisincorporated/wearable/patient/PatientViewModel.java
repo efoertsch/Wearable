@@ -2,6 +2,7 @@ package com.fisincorporated.wearable.patient;
 
 import android.content.Context;
 import android.databinding.ObservableArrayList;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
@@ -11,7 +12,7 @@ import android.support.v7.widget.SnapHelper;
 import com.fisincorporated.wearable.model.RecyclerViewAdapter;
 import com.fisincorporated.wearable.model.RecyclerViewViewModel;
 
-public class PatientViewModel extends RecyclerViewViewModel {
+public class PatientViewModel extends RecyclerViewViewModel implements AmbientChange {
 
     private ObservableArrayList<Patient> patientList = new ObservableArrayList<>();
 
@@ -50,6 +51,27 @@ public class PatientViewModel extends RecyclerViewViewModel {
 
     }
 
+
+    /***
+     *  Update UI as needed (text to white/disable anti-aliasing)
+     * @param ambientDetails
+     */
+    @Override
+    public void onEnterAmbient(Bundle ambientDetails) {
+//        textView.setTextColor(Color.WHITE);
+//        textView.getPaint().setAntiAlias(false);
+    }
+
+    @Override
+    public void onExitAmbient() {
+        //textView.setTextColor(Color.GREEN);
+        //textView.getPaint().setAntiAlias(true);
+    }
+
+    @Override
+    public void onUpdateAmbient(){
+        // do update
+    }
 
 
 }

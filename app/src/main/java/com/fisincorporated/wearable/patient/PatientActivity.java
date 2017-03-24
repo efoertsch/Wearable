@@ -27,4 +27,25 @@ public class PatientActivity extends ViewModelActivity {
         return patientViewModel = new PatientViewModel(this, savedViewModelState);
     }
 
+    @Override
+    public void onEnterAmbient(Bundle ambientDetails) {
+        super.onEnterAmbient(ambientDetails);
+        patientViewModel.onEnterAmbient(ambientDetails);
+
+    }
+    @Override
+    public void onExitAmbient() {
+        super.onExitAmbient();
+        patientViewModel.onExitAmbient();
+    }
+
+
+    @Override
+    public void onUpdateAmbient() {
+        super.onUpdateAmbient();
+        patientViewModel.onUpdateAmbient();
+        // Update the content
+    }
+
+
 }

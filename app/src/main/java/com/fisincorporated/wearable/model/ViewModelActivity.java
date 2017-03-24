@@ -25,6 +25,8 @@ public abstract class ViewModelActivity extends WearableActivity {
             savedViewModelState = savedInstanceState.getParcelable(EXTRA_VIEW_MODEL_STATE);
         }
         viewModel = createViewModel(savedViewModelState);
+
+        setAmbientEnabled();
     }
 
     @Override
