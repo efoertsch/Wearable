@@ -19,19 +19,19 @@ public class PatientManager {
     }
 
     private void addPatients() {
-        Patient patient = new Patient("John Doe", "120/80", 92);
+        Patient patient = new Patient(1, "John Doe", "120/80", 92);
         patientList.add(patient);
 
-        patient = new Patient("Jane Smith", "110/70", 72);
+        patient = new Patient(2, "Jane Smith", "110/70", 72);
         patientList.add(patient);
 
-        patient = new Patient("Iam Critical", "90/60", 52);
+        patient = new Patient(3, "Iam Critical", "120/80", 72);
         patientList.add(patient);
 
-        patient = new Patient("Iam Lazarus", "120/70", 62);
+        patient = new Patient(4, "Iam Lazarus", "120/70", 62);
         patientList.add(patient);
 
-        patient = new Patient("Young Blood", "130/80", 72);
+        patient = new Patient(5, "Young Blood", "130/80", 72);
         patientList.add(patient);
     }
 }

@@ -1,9 +1,13 @@
 <resources>
-    <string name="app_name">Wearable</string>
+    <string name="app_name">Patient Status</string>
+    <string name="ok">OK</string>
+
 
     <!-- Patient monitor -->
+    <string name="patient_name">Name: %1$s</string>
     <string name="patient_bp_label">BP: %1$s</string>
     <string name="patient_pulse_label">Pulse: %1$d</string>
+    <string name="patient_alert" translatable="false">Patient Alert!</string>
 
     <!-- Network -->
     <string name="network_fast">Network Fast</string>
@@ -18,5 +22,6 @@
     <string name="button_request_network">Request High-bandwidth Network</string>
     <string name="button_release_network">Release High-bandwidth Network</string>
     <string name="button_add_wifi">Add Wi-Fi Network</string>
+
 
 </resources>

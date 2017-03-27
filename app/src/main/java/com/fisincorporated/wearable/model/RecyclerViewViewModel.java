@@ -7,7 +7,8 @@ import android.support.v7.widget.RecyclerView;
 
 public abstract class RecyclerViewViewModel extends ViewModel {
 
-    RecyclerView.LayoutManager layoutManager;
+    protected RecyclerView recyclerView;
+    protected RecyclerView.LayoutManager layoutManager;
     private Parcelable savedLayoutManagerState;
 
     protected abstract RecyclerViewAdapter getAdapter();
@@ -27,6 +28,7 @@ public abstract class RecyclerViewViewModel extends ViewModel {
     }
 
     public final void setupRecyclerView(RecyclerView recyclerView) {
+        this.recyclerView = recyclerView;
         layoutManager = createLayoutManager();
         if (savedLayoutManagerState != null) {
             layoutManager.onRestoreInstanceState(savedLayoutManagerState);
@@ -34,6 +36,10 @@ public abstract class RecyclerViewViewModel extends ViewModel {
         }
         recyclerView.setAdapter(getAdapter());
         recyclerView.setLayoutManager(layoutManager);
+    }
+
+    public RecyclerView getRecyclerView() {
+        return recyclerView;
     }
 
     protected static class RecyclerViewViewModelState extends State {

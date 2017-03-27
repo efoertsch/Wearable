@@ -1,19 +1,18 @@
 package com.fisincorporated.wearable.model;
 
+import android.databinding.ObservableArrayList;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import java.util.ArrayList;
-
 public abstract class RecyclerViewAdapter<ITEM_T, VIEW_MODEL_T extends ItemViewModel<ITEM_T>>
         extends RecyclerView.Adapter<RecyclerViewAdapter.ItemViewHolder<ITEM_T, VIEW_MODEL_T>> {
 
-    protected final ArrayList<ITEM_T> items;
+    protected final ObservableArrayList<ITEM_T> items;
 
     public RecyclerViewAdapter() {
 
-        items = new ArrayList<>();
+        items = new ObservableArrayList<>();
     }
 
     @Override

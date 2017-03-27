@@ -73,5 +73,17 @@ public class PatientViewModel extends RecyclerViewViewModel implements AmbientCh
         // do update
     }
 
-
+    public void updatePatient(Patient patientUpdate) {
+        ObservableArrayList<Patient> patients =  adapter.getItems();
+        for (int i = 0 ; i < patients.size(); ++i) {
+            if (patients.get(i).getId() == patientUpdate.getId()) {
+                Patient patient = patients.get(i);
+                patient.setBp(patientUpdate.getBp());
+                patient.setPulse(patientUpdate.getPulse());
+                adapter.notifyItemRangeChanged(i, 1);
+                layoutManager.scrollToPosition(i);
+                break;
+            }
+        }
+    }
 }

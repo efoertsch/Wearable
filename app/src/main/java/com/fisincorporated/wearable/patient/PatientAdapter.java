@@ -11,8 +11,6 @@ import com.fisincorporated.wearable.R;
 import com.fisincorporated.wearable.databinding.PatientLayoutBinding;
 import com.fisincorporated.wearable.model.RecyclerViewAdapter;
 
-import java.util.ArrayList;
-
 public class PatientAdapter extends RecyclerViewAdapter<Patient, PatientItemViewModel> {
 
 
@@ -35,14 +33,13 @@ public class PatientAdapter extends RecyclerViewAdapter<Patient, PatientItemView
 
     // Note the RecyclerViewAdapter superclass has a generic onBindViewHolder method
 
-
     public void setItems(ObservableArrayList<Patient> newItems) {
         items.clear();
         items.addAll(newItems);
         notifyDataSetChanged();
     }
 
-    public ArrayList<Patient> getItems() {
+    public ObservableArrayList<Patient> getItems() {
         return items;
     }
 
