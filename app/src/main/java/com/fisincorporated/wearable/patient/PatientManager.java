@@ -4,18 +4,16 @@ package com.fisincorporated.wearable.patient;
 
 import android.databinding.ObservableArrayList;
 
+import javax.inject.Inject;
+
+
 public class PatientManager {
 
     private ObservableArrayList<Patient> patientList = new ObservableArrayList<>();
 
-    private static PatientManager patientManager;
-
-    public static ObservableArrayList<Patient> getPatients() {
-        if (patientManager == null) {
-            patientManager = new PatientManager();
-            patientManager.addPatients();
-        }
-        return patientManager.patientList;
+    @Inject
+    public PatientManager() {
+        addPatients();
     }
 
     private void addPatients() {
@@ -33,5 +31,9 @@ public class PatientManager {
 
         patient = new Patient(5, "Young Blood", "130/80", 72);
         patientList.add(patient);
+    }
+
+    public ObservableArrayList<Patient> getPatientList(){
+        return patientList;
     }
 }

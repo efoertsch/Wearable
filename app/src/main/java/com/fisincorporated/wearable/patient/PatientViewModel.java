@@ -9,36 +9,40 @@ import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
 
-import com.fisincorporated.wearable.model.RecyclerViewAdapter;
+import com.fisincorporated.wearable.dagger.DaggerComponentProvider;
 import com.fisincorporated.wearable.model.RecyclerViewViewModel;
+
+import javax.inject.Inject;
 
 public class PatientViewModel extends RecyclerViewViewModel implements AmbientChange {
 
     private ObservableArrayList<Patient> patientList = new ObservableArrayList<>();
 
-    private final Context appContext;
+    private final Context context;
 
-    private  PatientAdapter adapter;
+    @Inject
+    public PatientRecyclerViewAdapter adapter;
+
+    @Inject
+    public PatientManager patientManager;
 
     public PatientViewModel(Context context, @Nullable State savedInstanceState) {
         super(savedInstanceState);
-        appContext = context.getApplicationContext();
-
-        adapter = new PatientAdapter();
-        adapter.setItems(PatientManager.getPatients());
+        this.context = context;
+        DaggerComponentProvider.getComponent().inject(this);
+        adapter.setItems(patientManager.getPatientList());
     }
 
 
     @Override
-    protected RecyclerViewAdapter getAdapter() {
+    protected PatientRecyclerViewAdapter getAdapter() {
         return adapter;
     }
 
     @Override
     protected RecyclerView.LayoutManager createLayoutManager() {
-        return new LinearLayoutManager(appContext);
+        return new LinearLayoutManager(context);
     }
-
 
     /**
      * Attach SnapHelper to recycler view
@@ -81,9 +85,13 @@ public class PatientViewModel extends RecyclerViewViewModel implements AmbientCh
                 patient.setBp(patientUpdate.getBp());
                 patient.setPulse(patientUpdate.getPulse());
                 adapter.notifyItemRangeChanged(i, 1);
-                layoutManager.scrollToPosition(i);
+                scrollToPosition(i);
                 break;
             }
         }
+    }
+
+    public void scrollToPosition(int i) {
+        layoutManager.scrollToPosition(i);
     }
 }

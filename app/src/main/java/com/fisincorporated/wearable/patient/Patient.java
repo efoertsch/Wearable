@@ -79,6 +79,10 @@ public class Patient extends BaseObservable implements Parcelable {
         notifyPropertyChanged(BR.pulse);
     }
 
+    public String toString(){
+        return "Id:" + id + " Name:" + name + " bp:" + bp + " pulse:" + pulse;
+    }
+
     @Override
     public int describeContents() {
         return 0;

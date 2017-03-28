@@ -11,10 +11,13 @@ import com.fisincorporated.wearable.R;
 import com.fisincorporated.wearable.databinding.PatientLayoutBinding;
 import com.fisincorporated.wearable.model.RecyclerViewAdapter;
 
-public class PatientAdapter extends RecyclerViewAdapter<Patient, PatientItemViewModel> {
+import javax.inject.Inject;
+
+public class PatientRecyclerViewAdapter extends RecyclerViewAdapter<Patient, PatientItemViewModel> {
 
 
-    public PatientAdapter() {}
+    @Inject
+    public PatientRecyclerViewAdapter() {}
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -27,7 +30,7 @@ public class PatientAdapter extends RecyclerViewAdapter<Patient, PatientItemView
         PatientLayoutBinding binding = PatientLayoutBinding.bind(itemView);
         // Store the binding and model for the item
         binding.setPatient(patientItemViewModel);
-        return new PatientAdapter.ViewHolder(itemView, binding, patientItemViewModel);
+        return new PatientRecyclerViewAdapter.ViewHolder(itemView, binding, patientItemViewModel);
 
     }
 
