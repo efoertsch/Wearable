@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.util.Log;
+
 import com.fisincorporated.wearable.R;
 import com.fisincorporated.wearable.patient.PatientActivity;
 
@@ -16,6 +17,8 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
 
 
 public class PatientActivityTest extends BaseTest{
@@ -46,8 +49,18 @@ public class PatientActivityTest extends BaseTest{
 
         scrollToRecyclerPosition(R.id.patient_recyclerView, 0);
          ViewInteraction viewInteraction = onView(withRecyclerView(R.id.patient_recyclerView).atPosition(0));
-//        // Check name, bp, pulse
-        viewInteraction.check(matches(hasDescendant(withId(R.id.patient_patientName))));
+        // Check name, bp, pulse
+
+        onView(withRecyclerView(R.id.patient_recyclerView).atPosition(0)).check(matches(hasDescendant(allOf(
+                        withId(R.id.patient_patientName), withText("John Doe")))));
+
+        onView(withRecyclerView(R.id.patient_recyclerView).atPosition(0)).check(matches(hasDescendant(allOf(
+                withId(R.id.patient_blood_pressure),withText("120/80")))));
+
+        onView(withRecyclerView(R.id.patient_recyclerView).atPosition(0)).check(matches(hasDescendant(allOf(
+                withId(R.id.patient_patientName), withText("92")))));
+
+
 
     }
 
