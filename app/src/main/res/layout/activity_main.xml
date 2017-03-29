@@ -1,27 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.wearable.view.BoxInsetLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/patient_boxInsetLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="15dp"
-    tools:context="com.fisincorporated.wearable.MainActivity"
-    tools:deviceIds="wear">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.fisincorporated.wearable.patient.PatientViewModel"/>
+    </data>
+
+    <android.support.wearable.view.BoxInsetLayout
+        android:id="@+id/patient_boxInsetLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="5dp"
-        app:layout_box="all">
+        android:padding="15dp"
+        tools:context="com.fisincorporated.wearable.patient.PatientActivity"
+        tools:deviceIds="wear">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/patient_recyclerView"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            bind:layout_box="all">
 
-    </FrameLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/patient_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                bind:recyclerViewViewModel="@{viewModel}">
+            </android.support.v7.widget.RecyclerView>
 
-</android.support.wearable.view.BoxInsetLayout>
+        </FrameLayout>
+
+    </android.support.wearable.view.BoxInsetLayout>
+
+</layout>
