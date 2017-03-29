@@ -22,7 +22,9 @@ public class PatientActivity extends ViewModelActivity {
 
     private static final String TAG = PatientActivity.class.getSimpleName();
 
-    PatientViewModel patientViewModel;
+    private PatientViewModel patientViewModel;
+
+    private Intent startingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +33,23 @@ public class PatientActivity extends ViewModelActivity {
         patientViewModel.setupPatientRecyclerView(binding.patientRecyclerView);
         binding.setViewModel(patientViewModel);
         getFirebaseToken();
-        checkForAlert(getIntent());
+        startingIntent = getIntent();
     }
 
+    @Nullable
+    @Override
+    protected ViewModel createViewModel(@Nullable ViewModel.State savedViewModelState) {
+        return patientViewModel = new PatientViewModel(this, savedViewModelState);
+    }
+
+    public void onNewIntent(Intent intent) {
+        startingIntent = intent;
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
+        checkStartingIntent();
         checkForNetwork();
     }
 
@@ -46,40 +60,36 @@ public class PatientActivity extends ViewModelActivity {
         }
     }
 
-    public void onNewIntent(Intent intent) {
-        checkForAlert(intent);
-    }
 
-    private void checkForAlert(Intent intent) {
-        Patient patient = intent.getParcelableExtra(getResources().getString(R.string.patient_alert));
-        if (patient != null) {
-            StringBuilder sb = new StringBuilder();
-            if (patient.getId() > 0) {
-                Resources res = getResources();
-                sb.append(res.getString(R.string.patient_name, patient.getName()) + "\n"
-                        + res.getString(R.string.patient_bp_label, patient.getBp()) + "\n"
-                        + res.getString(R.string.patient_pulse_label, patient.getPulse()));
+    private void checkStartingIntent() {
+        if (startingIntent != null) {
+            final Patient patient = startingIntent.getParcelableExtra(getResources().getString(R.string.patient_alert));
+            if (patient != null) {
+                StringBuilder sb = new StringBuilder();
+                if (patient.getId() > 0) {
+                    Resources res = getResources();
+                    sb.append(res.getString(R.string.patient_name, patient.getName()) + "\n"
+                            + res.getString(R.string.patient_bp_label, patient.getBp()) + "\n"
+                            + res.getString(R.string.patient_pulse_label, patient.getPulse()));
+                }
+                if (sb.length() > 0) {
+                    WearableDialogHelper.DialogBuilder builder = new WearableDialogHelper.DialogBuilder(this);
+                    builder.setIcon(R.drawable.ic_action_heart).setTitle(R.string.patient_alert).setMessage(sb.toString())
+                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    patientViewModel.updatePatient(patient);
+                                }
+                            });
+                    builder.create().show();
+                }
+
             }
-            if (sb.length() > 0) {
-                WearableDialogHelper.DialogBuilder builder = new WearableDialogHelper.DialogBuilder(this);
-                builder.setIcon(R.drawable.ic_action_heart).setTitle(R.string.patient_alert).setMessage(sb.toString())
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        });
-                builder.create().show();
-            }
-            patientViewModel.updatePatient(patient);
         }
     }
 
 
-    @Nullable
-    @Override
-    protected ViewModel createViewModel(@Nullable ViewModel.State savedViewModelState) {
-        return patientViewModel = new PatientViewModel(this, savedViewModelState);
-    }
+
 
     @Override
     public void onEnterAmbient(Bundle ambientDetails) {
@@ -101,7 +111,6 @@ public class PatientActivity extends ViewModelActivity {
         patientViewModel.onUpdateAmbient();
         // Update the content
     }
-
 
     private void getFirebaseToken() {
         String token = FirebaseInstanceId.getInstance().getToken();
