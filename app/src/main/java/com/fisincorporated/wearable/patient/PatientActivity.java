@@ -13,6 +13,8 @@ import com.fisincorporated.wearable.R;
 import com.fisincorporated.wearable.databinding.ActivityMainBinding;
 import com.fisincorporated.wearable.model.ViewModel;
 import com.fisincorporated.wearable.model.ViewModelActivity;
+import com.fisincorporated.wearable.network.NetworkManager;
+import com.fisincorporated.wearable.network.NetworkSetupActivity;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 // TODO - check for network connection and if non start NetworkSetupActivity
@@ -30,6 +32,18 @@ public class PatientActivity extends ViewModelActivity {
         binding.setViewModel(patientViewModel);
         getFirebaseToken();
         checkForAlert(getIntent());
+    }
+
+    public void onResume() {
+        super.onResume();
+        checkForNetwork();
+    }
+
+    private void checkForNetwork() {
+        if (!NetworkManager.get().isNetworkHighBandwidth()) {
+            Intent intent = new Intent(this, NetworkSetupActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void onNewIntent(Intent intent) {

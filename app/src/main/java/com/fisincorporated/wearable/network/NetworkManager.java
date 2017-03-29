@@ -39,12 +39,14 @@ public class NetworkManager {
     private static final int MIN_NETWORK_BANDWIDTH_KBPS = 10000;
 
     private ConnectivityManager connectivityManager;
+    private CopyOnWriteArraySet<NetworkStateCallBack> networkStateCallbacks = new CopyOnWriteArraySet<>();
+
     private ConnectivityManager.NetworkCallback networkCallback;
 
     // Handler for dealing with network connection timeouts.
     private Handler handler;
 
-    private CopyOnWriteArraySet<NetworkStateCallBack> networkStateCallbacks = new CopyOnWriteArraySet<>();
+
 
     public interface NetworkStateCallBack {
         void currentNetworkState(int status);
@@ -53,10 +55,10 @@ public class NetworkManager {
     private NetworkManager() {
     }
 
-    public void init(Context context) {
+    public static void init(Context context) {
         if (networkManager == null) {
             networkManager = new NetworkManager();
-            connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            networkManager.connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         }
     }
 
