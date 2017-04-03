@@ -36,7 +36,8 @@ public class PatientViewModel extends RecyclerViewViewModel implements AmbientCh
         // TODO get patient section
         patientManagerService.setPatientSection("abcde");
         //patientManagerService.setPatientVitalsCallback(this);
-        patientManagerService.startPatientUpdates();
+        //patientManagerService.startPatientUpdates();
+        updatePatientVitals(patientManagerService.getPatientList());
 
     }
 

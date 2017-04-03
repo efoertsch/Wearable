@@ -4,12 +4,9 @@ package com.fisincorporated.wearable.patient;
 
 import android.app.job.JobInfo;
 import android.app.job.JobParameters;
-import android.app.job.JobScheduler;
 import android.app.job.JobService;
-import android.content.ComponentName;
 import android.content.Context;
 import android.databinding.ObservableArrayList;
-import android.util.Log;
 
 import com.fisincorporated.wearable.retrofit.AppRetrofit;
 import com.fisincorporated.wearable.retrofit.PatientVitalsService;
@@ -22,8 +19,6 @@ import okhttp3.Interceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.google.android.gms.wearable.DataMap.TAG;
 
 
 public class PatientManagerService extends JobService{
@@ -58,13 +53,13 @@ public class PatientManagerService extends JobService{
     public PatientManagerService (Context context, Interceptor interceptor) {
         this.context = context;
         service = new AppRetrofit(interceptor).getRetrofit().create(PatientVitalsService.class);
-        ComponentName serviceName = new ComponentName(context, PatientManagerService.class);
-        jobInfo = new JobInfo.Builder(JOB_ID, serviceName)
-                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
-                .setPeriodic(PERIODIC)
-                .setRequiresDeviceIdle(true)
-                .setPersisted(true)
-                .build();
+//        ComponentName serviceName = new ComponentName(context, PatientManagerService.class);
+//        jobInfo = new JobInfo.Builder(JOB_ID, serviceName)
+//                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+//                .setPeriodic(PERIODIC)
+//                .setRequiresDeviceIdle(true)
+//                .setPersisted(true)
+//                .build();
     }
 
 
@@ -73,11 +68,11 @@ public class PatientManagerService extends JobService{
     }
 
     public void startPatientUpdates() {
-        JobScheduler scheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
-        int result = scheduler.schedule(jobInfo);
-        if (result == JobScheduler.RESULT_SUCCESS) {
-            Log.d(TAG, "Job scheduled successfully!");
-        }
+//        JobScheduler scheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
+//        int result = scheduler.schedule(jobInfo);
+//        if (result == JobScheduler.RESULT_SUCCESS) {
+//            Log.d(TAG, "Job scheduled successfully!");
+//        }
     }
 
     private void callForPatientVitals() {
