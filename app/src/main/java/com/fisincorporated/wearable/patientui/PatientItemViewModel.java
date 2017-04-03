@@ -1,8 +1,9 @@
-package com.fisincorporated.wearable.patient;
+package com.fisincorporated.wearable.patientui;
 
 import android.databinding.Bindable;
 
 import com.fisincorporated.wearable.model.ItemViewModel;
+import com.fisincorporated.wearable.patient.Patient;
 
 public class PatientItemViewModel extends ItemViewModel<Patient> {
 

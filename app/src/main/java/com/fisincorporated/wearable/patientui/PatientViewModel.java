@@ -1,4 +1,4 @@
-package com.fisincorporated.wearable.patient;
+package com.fisincorporated.wearable.patientui;
 
 import android.content.Context;
 import android.databinding.ObservableArrayList;
@@ -11,28 +11,34 @@ import android.support.v7.widget.SnapHelper;
 
 import com.fisincorporated.wearable.dagger.DaggerComponentProvider;
 import com.fisincorporated.wearable.model.RecyclerViewViewModel;
+import com.fisincorporated.wearable.patient.Patient;
+import com.fisincorporated.wearable.patient.PatientManagerService;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
+//public class PatientViewModel extends RecyclerViewViewModel implements AmbientChange, PatientManagerService.PatientVitalsCallback {
 public class PatientViewModel extends RecyclerViewViewModel implements AmbientChange {
-
-    private ObservableArrayList<Patient> patientList = new ObservableArrayList<>();
-
     private final Context context;
 
     @Inject
     public PatientRecyclerViewAdapter adapter;
 
     @Inject
-    public PatientManager patientManager;
+    public PatientManagerService patientManagerService;
 
     public PatientViewModel(Context context, @Nullable State savedInstanceState) {
         super(savedInstanceState);
         this.context = context;
         DaggerComponentProvider.getComponent().inject(this);
-        adapter.setItems(patientManager.getPatientList());
-    }
+        adapter.setItems(new ObservableArrayList<Patient>());
+        // TODO get patient section
+        patientManagerService.setPatientSection("abcde");
+        //patientManagerService.setPatientVitalsCallback(this);
+        patientManagerService.startPatientUpdates();
 
+    }
 
     @Override
     protected PatientRecyclerViewAdapter getAdapter() {
@@ -77,7 +83,17 @@ public class PatientViewModel extends RecyclerViewViewModel implements AmbientCh
         // do update
     }
 
-    public void updatePatient(Patient patientUpdate) {
+    public void updatePatientVitals(List<Patient> patientList) {
+        for (Patient patient : patientList) {
+            updatePatient(patient, false);
+        }
+    }
+
+    public void updatePatient(Patient patient) {
+        updatePatient(patient, true);
+    }
+
+    public void updatePatient(Patient patientUpdate, boolean scrollToPatient) {
         ObservableArrayList<Patient> patients =  adapter.getItems();
         for (int i = 0 ; i < patients.size(); ++i) {
             if (patients.get(i).getId() == patientUpdate.getId()) {
@@ -85,13 +101,17 @@ public class PatientViewModel extends RecyclerViewViewModel implements AmbientCh
                 patient.setBp(patientUpdate.getBp());
                 patient.setPulse(patientUpdate.getPulse());
                 adapter.notifyItemRangeChanged(i, 1);
-                scrollToPosition(i);
+                if (scrollToPatient) {
+                    scrollToPosition(i);
+                }
                 break;
             }
         }
     }
 
-    public void scrollToPosition(int i) {
+    private void scrollToPosition(int i) {
         layoutManager.scrollToPosition(i);
     }
+
+
 }

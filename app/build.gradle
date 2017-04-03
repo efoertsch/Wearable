@@ -23,6 +23,23 @@ android {
     }
 }
 
+// to pick up mock xml responses
+//http://stackoverflow.com/questions/37221590/how-do-i-access-a-text-file-for-junit-test-in-android
+// to share test classes/files
+//http://blog.danlew.net/2015/11/02/sharing-code-between-unit-tests-and-instrumentation-tests-on-android/
+android.sourceSets {
+    String sharedTestJava = 'src/sharedTest/java'
+    String sharedTestResources = 'src/sharedTest/resources'
+    test {
+        java.srcDirs += sharedTestJava
+        resources.srcDirs += sharedTestResources
+    }
+    androidTest {
+        java.srcDirs += sharedTestJava
+        resources.srcDirs += sharedTestResources
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -31,6 +48,8 @@ dependencies {
     provided "com.google.android.wearable:wearable:${rootProject.ext.wearableVersion}"
     compile "com.google.android.gms:play-services-wearable:${rootProject.ext.playServicesWearableVersion}"
 
+    // Firebase notifications
+    compile "com.google.firebase:firebase-messaging:${rootProject.ext.firebaseMessagingVersion}"
 
     compile "com.android.support:support-annotations:${rootProject.ext.androidSupportVersion}"
 
@@ -38,8 +57,6 @@ dependencies {
     compile "com.google.dagger:dagger:${rootProject.ext.daggerVersion}"
     annotationProcessor "com.google.dagger:dagger-compiler:${rootProject.ext.daggerVersion}"
 
-    // Firebase notifications
-    compile "com.google.firebase:firebase-messaging:${rootProject.ext.firebaseMessagingVersion}"
 
     //Retrofit
     compile "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofitVersion}"

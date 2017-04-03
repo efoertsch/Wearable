@@ -5,13 +5,11 @@
     <uses-feature android:name="android.hardware.type.watch"/>
 
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
-
+    <uses-permission android:name="android.Manifest.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -25,7 +23,7 @@
             android:required="false"/>
 
         <activity
-            android:name=".patient.PatientActivity"
+            android:name=".patientui.PatientActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -56,6 +54,11 @@
             </intent-filter>
         </service>
 
+        <!-- <service
+            android:name=".patient.PatientManagerService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="false"/>
+            -->
 
 
         <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.

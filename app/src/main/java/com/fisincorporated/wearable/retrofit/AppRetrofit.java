@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppRetrofit {
 
-    public static final String PATIENT_URL = "https://dummy.com/patients/vitals/";
+    public static final String PATIENT_URL = "https://dummy.com/";
 
     private Retrofit retrofit;
 

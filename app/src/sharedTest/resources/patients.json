@@ -1,0 +1,8 @@
+{"patients":[
+    {"id":1,"name":"John Doe","bp":"120/80", "pulse":92},
+    {"id":2,"name":"Jane Smith","bp":"110/70", "pulse":72},
+    {"id":3,"name":"Iam Critical","bp":"120/80","pulse":72},
+    {"id":4,"name":"Iam Lazarus","bp":"120/70", "pulse":62},
+    {"id":5,"name":"Young Blood","bp":"130/80", "pulse":72}
+]
+}

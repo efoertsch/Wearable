@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.fisincorporated.wearable.patient.PatientViewModel"/>
+            type="com.fisincorporated.wearable.patientui.PatientViewModel"/>
     </data>
 
     <android.support.wearable.view.BoxInsetLayout
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="15dp"
-        tools:context="com.fisincorporated.wearable.patient.PatientActivity"
+        tools:context="com.fisincorporated.wearable.patientui.PatientActivity"
         tools:deviceIds="wear">
 
         <FrameLayout

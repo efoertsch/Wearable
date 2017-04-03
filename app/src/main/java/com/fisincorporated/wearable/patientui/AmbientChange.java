@@ -1,4 +1,4 @@
-package com.fisincorporated.wearable.patient;
+package com.fisincorporated.wearable.patientui;
 
 import android.os.Bundle;
 

@@ -31,7 +31,6 @@ ext {
     targetSdkVersion = 25
     compileSdkVersion = 25
     buildToolsVersion = "25.0.2"
-    supportLibVersion = "25.0.1"
 
     wearableVersion="2.0.1"
     playServicesWearableVersion="10.2.1"
@@ -44,8 +43,6 @@ ext {
     retrofitVersion="2.2.0"
     gsonVersion="2.7"
     converterGsonVersion="2.2.0"
-
-
     okHttpVersion="3.6.0"
 
     junitVersion="4.12"

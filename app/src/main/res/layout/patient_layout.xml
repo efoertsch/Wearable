@@ -8,7 +8,7 @@
 
         <variable
             name="patient"
-            type="com.fisincorporated.wearable.patient.PatientItemViewModel"/>
+            type="com.fisincorporated.wearable.patientui.PatientItemViewModel"/>
 
     </data>
 
@@ -41,7 +41,7 @@
             android:id="@+id/patient_heart_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{String.format(@string/patient_pulse_label, safeUnbox(patient.pulse))}"
+            android:text="@{String.format(@string/patient_pulse_label, patient.pulse)}"
             tools:text="Pulse: 72"/>
 
     </LinearLayout>

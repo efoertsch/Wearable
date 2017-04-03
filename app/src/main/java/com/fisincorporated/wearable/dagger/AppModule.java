@@ -1,13 +1,17 @@
 package com.fisincorporated.wearable.dagger;
 
 import com.fisincorporated.wearable.app.WearApplication;
-import com.fisincorporated.wearable.patient.PatientRecyclerViewAdapter;
-import com.fisincorporated.wearable.patient.PatientManager;
+import com.fisincorporated.wearable.patient.PatientManagerService;
+import com.fisincorporated.wearable.patientui.PatientRecyclerViewAdapter;
+import com.fisincorporated.wearable.retrofit.AppRetrofit;
+import com.fisincorporated.wearable.retrofit.LoggingInterceptor;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Interceptor;
+import retrofit2.Retrofit;
 
 
 @Module
@@ -21,8 +25,14 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public PatientManager providePatientManager(){
-        return new PatientManager();
+    public WearApplication providesWearApplication() {
+        return application;
+    }
+
+    @Provides
+    @Singleton
+    public PatientManagerService providePatientManager(){
+        return new PatientManagerService(providesWearApplication(), getInterceptor());
     }
 
     @Provides
@@ -30,9 +40,17 @@ public class AppModule {
         return new PatientRecyclerViewAdapter();
     }
 
+
     @Provides
-    public WearApplication providesWearApplication() {
-        return application;
+    @Singleton
+    public Retrofit provideAppRetrofit(){
+        return new AppRetrofit(getInterceptor()).getRetrofit();
+    }
+
+    @Provides
+    @Singleton
+    public Interceptor getInterceptor(){
+        return new LoggingInterceptor();
     }
 
 

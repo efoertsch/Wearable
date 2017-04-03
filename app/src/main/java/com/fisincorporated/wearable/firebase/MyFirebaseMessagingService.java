@@ -27,12 +27,10 @@ import android.util.Log;
 
 import com.fisincorporated.wearable.R;
 import com.fisincorporated.wearable.patient.Patient;
-import com.fisincorporated.wearable.patient.PatientActivity;
-import com.fisincorporated.wearable.patient.PatientInfo;
+import com.fisincorporated.wearable.patientui.PatientActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 // From https://github.com/firebase/quickstart-android/blob/master/messaging/app/src/main/java/com/google/firebase/quickstart/fcm/MyFirebaseMessagingService.java
@@ -86,7 +84,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     /**
      * Create and show a simple notification containing the received FCM message.
      *
-     * @param messageBody FCM message body received.
+     * @param message
      */
     private void sendNotification(String message) {
         if (message != null) {

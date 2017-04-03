@@ -7,14 +7,25 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.fisincorporated.wearable.BR;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Map;
 
 public class Patient extends BaseObservable implements Parcelable {
-    private int id;
+
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("bp")
+    @Expose
     private String bp;
-    private int pulse;
+    @SerializedName("pulse")
+    @Expose
+    private Integer pulse;
 
     public Patient(Map<String, String> patientInfo) {
         for (Map.Entry<String, String> entry : patientInfo.entrySet()) {
@@ -43,7 +54,7 @@ public class Patient extends BaseObservable implements Parcelable {
         }
     }
 
-    public Patient(int id, String name, String bp, int pulse) {
+    public Patient(Integer id, String name, String bp, Integer pulse) {
         this.id = id;
         this.name = name;
         this.bp = bp;
@@ -96,6 +107,7 @@ public class Patient extends BaseObservable implements Parcelable {
         dest.writeInt(this.pulse);
     }
 
+    @SuppressWarnings({"unchecked"})
     protected Patient(Parcel in) {
         this.id = in.readInt();
         this.name = in.readString();
