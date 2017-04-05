@@ -29,7 +29,7 @@ public class PatientManagerService extends JobService {
 
     private static int JOB_ID = 0;
     private static final long IMMEDIATE_CALL = 50;
-    private static final long PERIODIC_CALL = 5000;
+    private static final long PERIODIC_CALL = 60000;
     private static final String PATIENT_SECTION = "PATIENT_SECTION";
 
     private static PatientVitalsService service;

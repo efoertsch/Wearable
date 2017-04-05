@@ -1,60 +1,79 @@
 package com.fisincorporated.wearable.retrofit;
 
-import android.util.Log;
-
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.StringWriter;
+import java.net.URI;
+import java.net.URL;
 
 import okhttp3.Interceptor;
-import okhttp3.Request;
+import okhttp3.MediaType;
+import okhttp3.Protocol;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-import okio.Buffer;
 
 
 /**
+ * CLoned MockInterceptor as don't have real url to go against.
  * This uses a canned json response. In real life this might just log results from real api call
  *
  * http://stackoverflow.com/questions/32965790/retrofit-2-0-how-to-print-the-full-json-response
  */
 public class LoggingInterceptor implements Interceptor {
 
+    //TODO replace with 'real' interceptor
     @Override
     public Response intercept(Chain chain) throws IOException {
-        Log.i("LoggingInterceptor", "inside intercept callback");
-        Request request = chain.request();
-        long t1 = System.nanoTime();
-        String requestLog = String.format("Sending request %s on %s%n%s",
-                request.url(), chain.connection(), request.headers());
-        if (request.method().compareToIgnoreCase("post") == 0) {
-            requestLog = "\n" + requestLog + "\n" + bodyToString(request);
-        }
-        Log.d("TAG", "request" + "\n" + requestLog);
-        Response response = chain.proceed(request);
-        long t2 = System.nanoTime();
-
-        String responseLog = String.format("Received response for %s in %.1fms%n%s",
-                response.request().url(), (t2 - t1) / 1e6d, response.headers());
-
-        String bodyString = response.body().string();
-
-        Log.d("TAG", "response only" + "\n" + bodyString);
-
-        Log.d("TAG", "response" + "\n" + responseLog + "\n" + bodyString);
-
-        return response.newBuilder()
-                .body(ResponseBody.create(response.body().contentType(), bodyString))
+        final URI uri = chain.request().url().uri();
+        final String query = uri.getQuery();
+        String responseString = getMockXml(query);
+        Response response = new Response.Builder()
+                .code(200)
+                .message(responseString)
+                .request(chain.request())
+                .protocol(Protocol.HTTP_1_0)
+                .body(ResponseBody.create(MediaType.parse("application/json"), responseString.getBytes()))
+                .addHeader("content-type", "application/json")
                 .build();
+
+        return response;
     }
 
+    private String getMockXml(String api) {
+        String reply = "";
+        String mockjson = "";
+        StringBuilder sb = new StringBuilder();
+        StringWriter writer = new StringWriter();
+        InputStream in = null;
 
-    public static String bodyToString(final Request request) {
-        try {
-            final Request copy = request.newBuilder().build();
-            final Buffer buffer = new Buffer();
-            copy.body().writeTo(buffer);
-            return buffer.readUtf8();
-        } catch (final IOException e) {
-            return "did not work";
+        if (api.contains("section")) {
+            mockjson = "patients.json";
         }
+
+        if (!mockjson.isEmpty()) {
+            URL urL = this.getClass().getResource("/" + mockjson);
+            String strLine;
+            try {
+                in = urL.openStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+                while ((strLine = reader.readLine()) != null) {
+                    sb.append(strLine);
+                }
+            } catch (IOException ignore) {
+                //ignore!
+            } finally {
+                if (in != null) {
+                    try {
+                        in.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        System.out.println("Mocking:\n" + sb.toString());
+        return sb.toString();
     }
 }

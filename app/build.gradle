@@ -30,6 +30,9 @@ android {
 android.sourceSets {
     String sharedTestJava = 'src/sharedTest/java'
     String sharedTestResources = 'src/sharedTest/resources'
+    debug {
+        resources.srcDirs += sharedTestResources
+    }
     test {
         java.srcDirs += sharedTestJava
         resources.srcDirs += sharedTestResources
@@ -66,7 +69,6 @@ dependencies {
 
     //okhttp
     compile "com.squareup.okhttp3:okhttp:3.6.0"
-
 
     // JVM Unit Testing
     testCompile('junit:junit:4.12') {

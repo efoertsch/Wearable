@@ -53,6 +53,11 @@ public class PatientActivity extends ViewModelActivity {
         checkStartingIntent();
         checkForNetwork();
     }
+    @Override
+    public void onDestroy(){
+        patientViewModel.onDestroy();
+        super.onDestroy();
+    }
 
     private void checkForNetwork() {
         if (!NetworkManager.get().isNetworkHighBandwidth()) {

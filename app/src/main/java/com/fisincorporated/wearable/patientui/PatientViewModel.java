@@ -19,7 +19,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 //public class PatientViewModel extends RecyclerViewViewModel implements AmbientChange, PatientManagerService.PatientVitalsCallback {
-public class PatientViewModel extends RecyclerViewViewModel implements AmbientChange {
+public class PatientViewModel extends RecyclerViewViewModel implements AmbientChange, PatientManagerService.PatientVitalsCallback, LifeCycle {
     private final Context context;
 
     @Inject
@@ -33,12 +33,15 @@ public class PatientViewModel extends RecyclerViewViewModel implements AmbientCh
         this.context = context;
         DaggerComponentProvider.getComponent().inject(this);
         adapter.setItems(new ObservableArrayList<Patient>());
-        // TODO get patient section
-        patientManagerService.setPatientSection("abcde");
-        //patientManagerService.setPatientVitalsCallback(this);
-        //patientManagerService.startPatientUpdates();
-        updatePatientVitals(patientManagerService.getPatientList());
 
+        // This might be better put in onResume, but only if it is ok to stop getting updates if
+        // user backgrounds tha app.
+        patientManagerService.setPatientVitalsCallback(this);
+        // TODO get patient section
+        patientManagerService.schedulePatientUpdate(true, "abcde");
+
+        //patientManagerService.addStaticPatients();
+        //updatePatientVitals(patientManagerService.getPatientList());
     }
 
     @Override
@@ -59,9 +62,7 @@ public class PatientViewModel extends RecyclerViewViewModel implements AmbientCh
         recyclerView.setHasFixedSize(true);
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
-
     }
-
 
     /***
      *  Update UI as needed (text to white/disable anti-aliasing)
@@ -69,8 +70,8 @@ public class PatientViewModel extends RecyclerViewViewModel implements AmbientCh
      */
     @Override
     public void onEnterAmbient(Bundle ambientDetails) {
-//        textView.setTextColor(Color.WHITE);
-//        textView.getPaint().setAntiAlias(false);
+        //textView.setTextColor(Color.WHITE);
+        //textView.getPaint().setAntiAlias(false);
     }
 
     @Override
@@ -105,9 +106,12 @@ public class PatientViewModel extends RecyclerViewViewModel implements AmbientCh
                 if (scrollToPatient) {
                     scrollToPosition(i);
                 }
-                break;
+                return;
             }
         }
+        // here if new patient
+        patients.add(patientUpdate);
+        adapter.notifyItemInserted(patients.size() -1 );
     }
 
     private void scrollToPosition(int i) {
@@ -115,4 +119,16 @@ public class PatientViewModel extends RecyclerViewViewModel implements AmbientCh
     }
 
 
+    @Override
+    public void onResume() {}
+
+    @Override
+    public void onPause() {}
+
+    public void onDestroy() {
+        if (patientManagerService != null) {
+            patientManagerService.removePatientVitalsCallback();
+        }
+
+    }
 }
