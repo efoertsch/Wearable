@@ -8,7 +8,7 @@
 
         <variable
             name="patient"
-            type="com.fisincorporated.wearable.patient.PatientItemViewModel"/>
+            type="com.fisincorporated.wearable.patientui.PatientItemViewModel"/>
 
     </data>
 

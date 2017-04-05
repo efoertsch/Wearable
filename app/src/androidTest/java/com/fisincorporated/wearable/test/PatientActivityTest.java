@@ -8,8 +8,8 @@ import android.util.Log;
 
 import com.fisincorporated.wearable.R;
 import com.fisincorporated.wearable.patient.Patient;
-import com.fisincorporated.wearable.patient.PatientActivity;
-import com.fisincorporated.wearable.patient.PatientManager;
+import com.fisincorporated.wearable.patient.PatientManagerService;
+import com.fisincorporated.wearable.patientui.PatientActivity;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -51,7 +51,7 @@ public class PatientActivityTest extends BaseTest {
 
     @Test
     public void checkPatients() {
-        ArrayList<Patient> patientList = (new PatientManager()).getPatientList();
+        ArrayList<Patient> patientList = (new PatientManagerService()).getPatientList();
         Patient patient;
         patientActivityLaunches();
         res = mActivityRule.getActivity().getResources();

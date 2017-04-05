@@ -1,4 +1,4 @@
-package com.fisincorporated.wearable.patient;
+package com.fisincorporated.wearable.patientui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import com.fisincorporated.wearable.model.ViewModel;
 import com.fisincorporated.wearable.model.ViewModelActivity;
 import com.fisincorporated.wearable.network.NetworkManager;
 import com.fisincorporated.wearable.network.NetworkSetupActivity;
+import com.fisincorporated.wearable.patient.Patient;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 // TODO - check for network connection and if non start NetworkSetupActivity
@@ -51,6 +52,11 @@ public class PatientActivity extends ViewModelActivity {
         super.onResume();
         checkStartingIntent();
         checkForNetwork();
+    }
+    @Override
+    public void onDestroy(){
+        patientViewModel.onDestroy();
+        super.onDestroy();
     }
 
     private void checkForNetwork() {

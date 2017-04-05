@@ -1,4 +1,4 @@
-package com.fisincorporated.wearable.patient;
+package com.fisincorporated.wearable.patientui;
 
 
 import android.databinding.ObservableArrayList;
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.fisincorporated.wearable.R;
 import com.fisincorporated.wearable.databinding.PatientLayoutBinding;
 import com.fisincorporated.wearable.model.RecyclerViewAdapter;
+import com.fisincorporated.wearable.patient.Patient;
 
 import javax.inject.Inject;
 

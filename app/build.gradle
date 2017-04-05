@@ -23,6 +23,26 @@ android {
     }
 }
 
+// to pick up mock xml responses
+//http://stackoverflow.com/questions/37221590/how-do-i-access-a-text-file-for-junit-test-in-android
+// to share test classes/files
+//http://blog.danlew.net/2015/11/02/sharing-code-between-unit-tests-and-instrumentation-tests-on-android/
+android.sourceSets {
+    String sharedTestJava = 'src/sharedTest/java'
+    String sharedTestResources = 'src/sharedTest/resources'
+    debug {
+        resources.srcDirs += sharedTestResources
+    }
+    test {
+        java.srcDirs += sharedTestJava
+        resources.srcDirs += sharedTestResources
+    }
+    androidTest {
+        java.srcDirs += sharedTestJava
+        resources.srcDirs += sharedTestResources
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -39,6 +59,16 @@ dependencies {
 
     // Firebase notifications
     compile 'com.google.firebase:firebase-messaging:10.2.1'
+
+
+    //Retrofit
+    compile "com.squareup.retrofit2:retrofit:2.2.0"
+    compile "com.squareup.retrofit2:adapter-rxjava2:2.2.0"
+    compile "com.google.code.gson:gson:2.7"
+    compile "com.squareup.retrofit2:converter-gson:2.2.0"
+
+    //okhttp
+    compile "com.squareup.okhttp3:okhttp:3.6.0"
 
     // JVM Unit Testing
     testCompile('junit:junit:4.12') {

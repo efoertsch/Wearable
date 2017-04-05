@@ -1,6 +1,6 @@
 package com.fisincorporated.wearable.dagger;
 
-import com.fisincorporated.wearable.patient.PatientViewModel;
+import com.fisincorporated.wearable.patientui.PatientViewModel;
 
 import javax.inject.Singleton;
 

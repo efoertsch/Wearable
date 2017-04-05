@@ -26,7 +26,7 @@ public abstract class ViewModelActivity extends WearableActivity {
         }
         viewModel = createViewModel(savedViewModelState);
 
-       // setAmbientEnabled();
+        setAmbientEnabled();
     }
 
     @Override
